@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WatchNext - Web Streaming Application
 
-## Getting Started
+WatchNext is a modern web application for discovering movies and TV series, tracking your watchlist, and watching cinematic trailers. Built with a sleek, cinematic design language using **Next.js (App Router)** and **Tailwind CSS**.
 
-First, run the development server:
+## ✨ Features
 
+- **Dual API Provider (Adapter Pattern)**: Seamlessly toggle between **Watchmode API** and **TMDB API** with zero UI changes. Data is mapped automatically!
+- **Cinematic In-App Trailer Player**: Watch YouTube trailers directly within the app via a sleek blur-backdrop modal, without being redirected.
+- **Global Search & Filtering**: Fast debounce search functionality and platform-specific filters (Netflix, Hulu, Prime Video, etc.).
+- **Genre Exploration**: Browse massive libraries categorized by genres (Action, Drama, Anime, etc.).
+- **Recommendations**: "You Might Also Like" sections dynamically generated based on your current viewing context.
+- **Local State Watchlist**: Save your favorite movies and series to your profile. Powered by **Zustand** with local storage persistence.
+- **Backend-for-Frontend (BFF)**: Next.js API route handlers act as a proxy to keep API keys secure.
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 14+ (App Router, Server Components)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS + Shadcn UI components
+- **State Management:** Zustand (with Local Storage middleware)
+- **Icons:** Lucide React
+
+## 🚀 Getting Started
+
+### 1. Installation
+Clone the repository and install the dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
+### 2. Environment Setup
+Rename `.env.example` to `.env` (or create a new `.env` file) and fill in your API keys:
+```env
+# Get this from https://api.watchmode.com/
+WATCHMODE_API_KEY=your_watchmode_api_key_here
+
+# Get this from https://developer.themoviedb.org/
+TMDB_API_KEY=your_tmdb_api_key_here
+
+# Choose which API to use: 'tmdb' or 'watchmode'
+ACTIVE_API_PROVIDER=tmdb
+```
+
+### 3. Run Development Server
+Start the Next.js development server:
+```bash
+npm run dev
+```
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📐 Architecture Note (Adapter Pattern)
+This project uses an Adapter Pattern (`src/lib/api-service.ts`) to abstract the data layer. 
+When `ACTIVE_API_PROVIDER` is set to `tmdb`, the application utilizes `src/lib/tmdb.ts` to map TMDB's raw JSON responses into the exact interface expected by the Watchmode-based frontend UI. This allows for seamless transitions between different data providers without breaking React components.
