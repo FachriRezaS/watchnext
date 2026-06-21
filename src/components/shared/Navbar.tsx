@@ -1,23 +1,27 @@
 import Link from 'next/link';
 import { Film, User, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { MobileMenu } from './MobileMenu';
 
 export function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-neutral-800 bg-black/50 backdrop-blur-md">
-      <div className="container mx-auto flex h-16 items-center px-4">
-        <Link href="/" className="flex items-center gap-2 mr-6">
-          <Film className="h-6 w-6 text-red-500" />
-          <span className="text-lg font-bold tracking-tight text-white hidden sm:inline-block">
-            WatchNext
-          </span>
-        </Link>
-        <div className="flex gap-6 text-sm font-medium flex-1">
-          <Link href="/movies" className="transition-colors hover:text-white text-neutral-400">Movies</Link>
-          <Link href="/series" className="transition-colors hover:text-white text-neutral-400">Series</Link>
-          <Link href="/genres" className="transition-colors hover:text-white text-neutral-400">Genres</Link>
+    <nav className="sticky top-0 z-50 w-full border-b border-neutral-800 bg-black/95 backdrop-blur-md">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <div className="flex items-center">
+          <MobileMenu />
+          <Link href="/" className="flex items-center gap-2 md:mr-6 ml-2 md:ml-0">
+            <Film className="h-6 w-6 text-red-500" />
+            <span className="text-lg font-bold tracking-tight text-white hidden sm:inline-block">
+              WatchNext
+            </span>
+          </Link>
+          <div className="hidden md:flex gap-6 text-sm font-medium">
+            <Link href="/movies" className="transition-colors hover:text-white text-neutral-400">Movies</Link>
+            <Link href="/series" className="transition-colors hover:text-white text-neutral-400">Series</Link>
+            <Link href="/genres" className="transition-colors hover:text-white text-neutral-400">Genres</Link>
+          </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           <Button asChild variant="ghost" size="icon" className="hidden sm:inline-flex">
             <Link href="/search">
               <Search className="h-5 w-5" />

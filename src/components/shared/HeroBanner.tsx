@@ -42,25 +42,25 @@ export function HeroBanner({ items }: { items: WatchmodeRelease[] }) {
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent z-10" />
       </div>
 
-      <div className="relative z-20 container mx-auto h-full flex flex-col justify-end pb-16 md:pb-24 px-4">
-        <div className="max-w-2xl space-y-4">
+      <div className="relative z-20 container mx-auto h-full flex flex-col justify-end pb-10 sm:pb-16 md:pb-24 px-4">
+        <div className="max-w-2xl space-y-4 text-center md:text-left flex flex-col items-center md:items-start mx-auto md:mx-0">
           <div className="flex items-center gap-2">
             <span className="px-2 py-1 bg-red-600 text-white text-xs font-bold rounded uppercase tracking-wider">
               Trending #{1}
             </span>
             <span className="text-neutral-300 text-sm capitalize">{displayType}</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white drop-shadow-lg leading-tight">
             {item.title || 'Untitled'}
           </h1>
-          <div className="flex flex-wrap items-center gap-4 pt-4">
-            <Button asChild size="lg" className="rounded-full bg-white text-black hover:bg-neutral-200 font-semibold px-8">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 md:gap-4 pt-4 w-full">
+            <Button asChild size="lg" className="rounded-full bg-white text-black hover:bg-neutral-200 font-semibold px-8 w-full sm:w-auto">
               <Link href={href}>
                 <Play className="w-5 h-5 mr-2 fill-black" />
                 Play Now
               </Link>
             </Button>
-            <Button asChild size="lg" variant="secondary" className="rounded-full bg-neutral-800/80 backdrop-blur-md text-white hover:bg-neutral-700 px-8">
+            <Button asChild size="lg" variant="secondary" className="rounded-full bg-neutral-800/80 backdrop-blur-md text-white hover:bg-neutral-700 px-8 w-full sm:w-auto">
               <Link href={href}>
                 <Info className="w-5 h-5 mr-2" />
                 More Info

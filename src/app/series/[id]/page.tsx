@@ -23,27 +23,28 @@ export default async function SeriesDetailPage({ params }: { params: Promise<{ i
 
   return (
     <div className="min-h-screen pb-12">
-      <div className="relative h-[60vh] w-full">
+      <div className="relative min-h-[60vh] md:h-[60vh] w-full flex flex-col justify-end">
         <div className="absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={data.backdrop || data.poster} alt={data.title} className="w-full h-full object-cover opacity-30" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         </div>
-        <div className="relative z-10 container mx-auto px-4 h-full flex items-end pb-12">
-          <div className="flex flex-col md:flex-row gap-8 items-end">
+        <div className="relative z-10 container mx-auto px-4 flex items-end pb-12 pt-24 md:pt-0">
+          <div className="flex flex-col items-center text-center md:flex-row md:items-end md:text-left gap-6 md:gap-8 w-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={data.poster} alt={data.title} className="w-48 md:w-64 rounded-lg shadow-2xl" />
-            <div className="space-y-4 max-w-3xl">
-              <h1 className="text-4xl md:text-5xl font-bold text-white">{data.title}</h1>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-300">
+            <img src={data.poster} alt={data.title} className="w-40 sm:w-48 md:w-64 rounded-lg shadow-2xl shrink-0" />
+            <div className="space-y-4 max-w-3xl flex-1 flex flex-col items-center md:items-start">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">{data.title}</h1>
+              <div className="flex flex-wrap justify-center md:justify-start items-center gap-3 md:gap-4 text-sm text-neutral-300">
                 <span className="flex items-center gap-1"><Star className="w-4 h-4 text-yellow-500" /> {data.user_rating}</span>
                 <span>{data.year}</span>
+                <span>{data.runtime_minutes} min</span>
                 <div className="flex gap-2">
                   {data.genre_names?.map((g: string) => <Badge key={g} variant="secondary">{g}</Badge>)}
                 </div>
               </div>
-              <p className="text-neutral-300 line-clamp-3 md:line-clamp-none">{data.plot_overview}</p>
-              <div className="pt-4 flex flex-wrap gap-4">
+              <p className="text-neutral-300 line-clamp-4 md:line-clamp-none">{data.plot_overview}</p>
+              <div className="pt-4 flex flex-wrap justify-center md:justify-start gap-4">
                 <WatchlistButtons item={data} />
                 <PlayTrailerButton url={data.trailer} />
               </div>
