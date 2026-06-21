@@ -12,11 +12,11 @@ export function MovieCard({ item }: { item: any }) {
     <Link href={href} className="group relative flex flex-col gap-2 transition-transform hover:scale-105">
       <div className="relative aspect-[2/3] w-full overflow-hidden rounded-lg">
         {posterUrl ? (
-          /* eslint-disable-next-line @next/next/no-img-element */
           <img
             src={posterUrl}
             alt={item.title || 'Movie Poster'}
             className="object-cover w-full h-full transition-all group-hover:brightness-75"
+            suppressHydrationWarning={true}
           />
         ) : (
           <div className="w-full h-full bg-neutral-800 flex items-center justify-center p-4 transition-all group-hover:brightness-75">

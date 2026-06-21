@@ -5,11 +5,13 @@ import { Search as SearchIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { MovieCard } from '@/components/shared/MovieCard';
 import { useDebounce } from '@/hooks/useDebounce';
+import { useToast } from '@/components/ui/ToastProvider';
 
 export default function SearchPage() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { error } = useToast();
   
   const debouncedQuery = useDebounce(query, 500);
 
@@ -25,11 +27,13 @@ export default function SearchPage() {
         const res = await fetch(`/api/search?q=${encodeURIComponent(debouncedQuery)}`);
         if (res.ok) {
           const data = await res.json();
-          // Watchmode autocomplete returns items in an array `results`
           setResults(data.results || []);
+        } else {
+          error('Failed to search titles. Please try again.');
         }
-      } catch (error) {
-        console.error('Search failed:', error);
+      } catch (err) {
+        error('A network error occurred while searching.');
+        console.error('Search failed:', err);
       } finally {
         setIsLoading(false);
       }

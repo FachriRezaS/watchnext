@@ -5,8 +5,8 @@ export default async function GenreDetailPage({
   params,
   searchParams,
 }: {
-  params: { id: string };
-  searchParams: { name?: string };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ name?: string }>;
 }) {
   const { id } = await params;
   const { name } = await searchParams;

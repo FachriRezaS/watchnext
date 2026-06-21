@@ -4,8 +4,9 @@ import { Star } from 'lucide-react';
 import { MovieCard } from '@/components/shared/MovieCard';
 import { PlayTrailerButton } from '@/components/shared/PlayTrailerButton';
 import { apiService } from '@/lib/api-service';
+import { notFound } from 'next/navigation';
 
-export default async function MovieDetailPage({ params }: { params: { id: string } }) {
+export default async function MovieDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   let data;
   try {
@@ -15,12 +16,7 @@ export default async function MovieDetailPage({ params }: { params: { id: string
   }
 
   if (!data || data.error) {
-    return (
-      <div className="container mx-auto py-24 text-center">
-        <h1 className="text-2xl font-bold text-white mb-4">Movie Not Found</h1>
-        <p className="text-neutral-400">Please go back to the homepage and refresh if you recently switched APIs.</p>
-      </div>
-    );
+    notFound();
   }
 
   return (
